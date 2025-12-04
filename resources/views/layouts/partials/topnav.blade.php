@@ -6,13 +6,6 @@
             <i class="bi bi-list"></i>
         </button>
 
-        <!-- Breadcrumb -->
-        <nav aria-label="breadcrumb" class="d-none d-md-block">
-            <ol class="breadcrumb mb-0">
-                @yield('breadcrumb', '<li class="breadcrumb-item active">Dashboard</li>')
-            </ol>
-        </nav>
-
         <!-- User Menu -->
         <div class="navbar-nav ms-auto">
             <!-- Notifications -->
