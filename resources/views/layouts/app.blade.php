@@ -18,20 +18,28 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <!-- SANG GRAWA Custom Styles -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
 
     <!-- Page Specific Styles -->
     @stack('styles')
 </head>
 
 <body class="@yield('body-class', '')">
-    @yield('content')
+    @include('layouts.partials.sidebar')
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        @include('layouts.partials.topnav')
 
-    <!-- Custom Scripts -->
-    @stack('scripts')
+
+        <!-- Page Content -->
+        <main class="content">
+            @yield('content')
+        </main>
+    </div>
+
+    @include('layouts.partials.foot')
+
 </body>
 
 </html>

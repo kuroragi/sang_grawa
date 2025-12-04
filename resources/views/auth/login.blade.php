@@ -1,10 +1,27 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('title', 'Login')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-@section('body-class', 'login-page')
+    <title>{{ config('app.name', 'SANG GRAWA') }} - Login</title>
 
-@section('content')
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- SANG GRAWA Custom Styles -->
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+</head>
+
+<body class="login-page">
     <div class="login-container">
         <!-- Left Side - Image Section -->
         <div class="col-lg-7 image-section">
@@ -103,9 +120,10 @@
             </div>
         </div>
     </div>
-@endsection
 
-@push('scripts')
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         // Toggle Password Visibility
         function togglePassword() {
@@ -184,4 +202,6 @@
         window.addEventListener('resize', handleResize);
         window.addEventListener('load', handleResize);
     </script>
-@endpush
+</body>
+
+</html>
