@@ -1,6 +1,6 @@
 # Sistem Angkot Gratis untuk Siswa (SANG GRAWA) – Kota Bukittinggi
 
-Proyek ini adalah sistem digital untuk mendukung program unggulan Wali Kota Bukittinggi yaitu **"Angkot Gratis untuk Siswa"**. Sistem ini dirancang untuk melakukan pendataan otomatis ketika siswa naik atau turun angkot menggunakan **RFID** atau **Barcode Card** sesuai kebijakan yang ditetapkan.
+Proyek ini adalah sistem digital untuk mendukung program unggulan Wali Kota Bukittinggi yaitu **"Angkot Gratis untuk Siswa"**. Sistem ini dirancang untuk melakukan pendataan otmatis ketika siswa naik atau turun angkot menggunakan **RFID** atau **QR Code Card** sesuai kebijakan yang ditetapkan.
 
 ---
 
@@ -19,16 +19,16 @@ Proyek ini adalah sistem digital untuk mendukung program unggulan Wali Kota Buki
 ### Alur Kerja Siswa & Supir
 
 1. Siswa naik angkot.
-2. Supir melakukan **scan barcode** atau siswa **tap kartu RFID**.
+2. Supir melakukan **scan QR code** atau siswa **tap kartu RFID**.
 3. Angkot berjalan sesuai trayek.
 4. Siswa sampai di tujuan.
 5. Siswa turun.
-6. Supir melakukan **scan barcode** atau siswa **tap kartu RFID**.
+6. Supir melakukan **scan QR code** atau siswa **tap kartu RFID**.
 7. Data tercatat, siswa pergi.
 
 ### Alur Kerja Sistem
 
-1. Sistem membaca input kartu (RFID atau barcode).
+1. Sistem membaca input kartu (RFID atau QR code).
 2. Sistem melakukan validasi kartu dan siswa.
 3. Sistem mencatat data siswa, angkot, supir, trayek, waktu, dan lokasi (opsional GPS).
 4. Sistem mengembalikan hasil input kepada supir (berhasil/gagal).
@@ -53,7 +53,7 @@ Proyek ini adalah sistem digital untuk mendukung program unggulan Wali Kota Buki
 ### **Aturan Penggunaan Kartu**
 
 * **Tidak ada sistem tabungan** - setiap sesi (pagi/sore) berdiri sendiri.
-* Contoh: Jika siswa hanya tap 1 kali di pagi hari, sisa tap **tidak bisa** digunakan di sore hari.
+* Contoh: Jika siswa hanya scan/tap 1 kali di pagi hari, sisa scan/tap **tidak bisa** digunakan di sore hari.
 * Setiap sesi pagi dan sore, siswa mendapat **maksimal 2 kali tap** (naik-turun).
 * Setelah 2 kali tap dalam satu sesi, kartu akan **ditolak** hingga sesi berikutnya.
 
@@ -101,7 +101,7 @@ Berikut daftar tabel yang akan digunakan beserta fungsinya.
 
 ### **10. kartu** (tambahan wajib)
 
-* Menyimpan data kartu siswa: RFID UID / Barcode ID.
+* Menyimpan data kartu siswa: RFID UID / QR Code ID.
 
 ### **11. log_aktivitas** (opsional)
 
@@ -123,7 +123,7 @@ Berikut daftar tabel yang akan digunakan beserta fungsinya.
 
 ### **Sisi Supir / Angkot**
 
-* Scan barcode atau RFID.
+* Scan QR code atau RFID.
 * **Validasi waktu operasional** (pagi: 06:30-08:00, sore: 15:00-18:00).
 * **Validasi kuota tap** (maksimal 2x per sesi per siswa).
 * Validasi kartu dan status siswa.
@@ -139,7 +139,7 @@ Berikut daftar tabel yang akan digunakan beserta fungsinya.
 * CRUD trayek.
 * CRUD driver.
 * Manajemen siswa.
-* Manajemen kartu (barcode / RFID).
+* Manajemen kartu (QR code / RFID).
 * **Manajemen jadwal operasional** (pagi & sore).
 * Laporan harian, mingguan, bulanan.
 * **Laporan pembayaran untuk Pemkot** (akumulasi biaya per PT Angkot).
@@ -160,7 +160,7 @@ Berikut daftar tabel yang akan digunakan beserta fungsinya.
 * **Frontend:** Blade / Livewire 3 (jika SPA ringan)
 * **Database:** MariaDB
 * **Authentikasi:** Spatie
-* **Hardware:** RFID Reader / Barcode Scanner (dari handphone)
+* **Hardware:** RFID Reader / QR Code Scanner (dari handphone)
 * **Report:** Dompdf
 * **Tools:** kuroragi/general-helper
 * **Logger:** kuroragi/general-helper/Log
@@ -201,7 +201,7 @@ Berikut daftar tabel yang akan digunakan beserta fungsinya.
 
 ### **4. Modul Transaksi Tap**
 
-* Endpoint untuk menerima input RFID/barcode.
+* Endpoint untuk menerima input RFID/QR code.
 * **Validasi waktu operasional** (cek jam pagi/sore).
 * **Validasi kuota tap** (maksimal 2x per sesi per siswa).
 * Validasi siswa dan status kartu.
@@ -228,7 +228,7 @@ Berikut daftar tabel yang akan digunakan beserta fungsinya.
 
 ### **7. Testing & Validasi**
 
-* Testing hardware RFID & barcode.
+* Testing hardware RFID & QR code.
 * Integrasi UI & API.
 * User acceptance test.
 
