@@ -12,9 +12,7 @@ Route::get('/dashboard', function () {
 // })->middleware('auth')->name('dashboard');
 
 // Schools routes
-Route::get('/schools', function () {
-    return view('pages.schools.index');
-})->name('schools.index');
+Route::get('/schools', \App\Livewire\School\SchoolList::class)->name('schools.index');
 
 // Master Data routes (placeholder)
 Route::get('/companies', function () {
