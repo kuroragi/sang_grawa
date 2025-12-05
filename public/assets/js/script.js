@@ -450,3 +450,222 @@ animationStyles.textContent = `
     }
 `;
 document.head.appendChild(animationStyles);
+
+// ========================================
+// SCHOOL MODAL FUNCTIONS
+// Functions for Add School Modal
+// ========================================
+
+// Initialize Add School Modal functionality
+function initializeAddSchoolModal() {
+    const form = document.getElementById('addSchoolForm');
+    const modal = document.getElementById('addSchoolModal');
+    
+    if (!form || !modal) return;
+    
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    // Form validation styling
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--primary-red, #e74c3c)';
+            this.style.boxShadow = '0 0 0 0.2rem rgba(231, 76, 60, 0.25)';
+        });
+
+        input.addEventListener('blur', function() {
+            this.style.borderColor = '#e9ecef';
+            this.style.boxShadow = 'none';
+
+            // Validate individual field
+            validateField(this);
+        });
+
+        input.addEventListener('input', function() {
+            // Remove invalid styling on input
+            this.classList.remove('is-invalid');
+            const feedback = this.parentNode.querySelector('.invalid-feedback');
+            if (feedback) {
+                feedback.remove();
+            }
+        });
+    });
+
+    // NPSN formatting (only numbers, max 8 digits)
+    const npsnInput = document.getElementById('npsn');
+    if (npsnInput) {
+        npsnInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '').substring(0, 8);
+        });
+    }
+
+    // Phone number formatting
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            // Allow numbers, hyphens, spaces, and parentheses
+            this.value = this.value.replace(/[^0-9\\-\\s\\(\\)]/g, '');
+        });
+    }
+
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (validateSchoolForm()) {
+            submitSchoolForm();
+        }
+    });
+
+    // Reset form when modal is closed
+    modal.addEventListener('hidden.bs.modal', function() {
+        form.reset();
+        clearSchoolValidation();
+    });
+}
+
+// Validate individual field for school form
+function validateField(field) {
+    const value = field.value.trim();
+    let isValid = true;
+    let message = '';
+
+    // Clear previous validation
+    field.classList.remove('is-invalid', 'is-valid');
+    const existingFeedback = field.parentNode.querySelector('.invalid-feedback');
+    if (existingFeedback) {
+        existingFeedback.remove();
+    }
+
+    // Required field validation
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        message = 'Field ini wajib diisi';
+    }
+
+    // Specific validations
+    switch (field.id) {
+        case 'school_name':
+            if (value && value.length < 3) {
+                isValid = false;
+                message = 'Nama sekolah minimal 3 karakter';
+            }
+            break;
+
+        case 'npsn':
+            if (value && (value.length !== 8 || !/^\\d{8}$/.test(value))) {
+                isValid = false;
+                message = 'NPSN harus 8 digit angka';
+            }
+            break;
+
+        case 'email':
+            if (value && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value)) {
+                isValid = false;
+                message = 'Format email tidak valid';
+            }
+            break;
+
+        case 'established_year':
+            const currentYear = new Date().getFullYear();
+            if (value && (value < 1900 || value > currentYear)) {
+                isValid = false;
+                message = `Tahun harus antara 1900 dan ${currentYear}`;
+            }
+            break;
+
+        case 'student_count':
+            if (value && (value < 0 || value > 10000)) {
+                isValid = false;
+                message = 'Jumlah siswa tidak valid';
+            }
+            break;
+    }
+
+    // Apply validation styling
+    if (!isValid) {
+        field.classList.add('is-invalid');
+        const feedback = document.createElement('div');
+        feedback.className = 'invalid-feedback';
+        feedback.textContent = message;
+        field.parentNode.appendChild(feedback);
+    } else if (value) {
+        field.classList.add('is-valid');
+    }
+
+    return isValid;
+}
+
+// Validate entire school form
+function validateSchoolForm() {
+    const form = document.getElementById('addSchoolForm');
+    if (!form) return false;
+    
+    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+    let isValid = true;
+
+    inputs.forEach(input => {
+        if (!validateField(input)) {
+            isValid = false;
+        }
+    });
+
+    return isValid;
+}
+
+// Clear all validation for school form
+function clearSchoolValidation() {
+    const form = document.getElementById('addSchoolForm');
+    if (!form) return;
+    
+    const inputs = form.querySelectorAll('input, select, textarea');
+
+    inputs.forEach(input => {
+        input.classList.remove('is-invalid', 'is-valid');
+        input.style.borderColor = '#e9ecef';
+        input.style.boxShadow = 'none';
+    });
+
+    const feedbacks = form.querySelectorAll('.invalid-feedback');
+    feedbacks.forEach(feedback => feedback.remove());
+}
+
+// Submit school form (placeholder - would normally send to server)
+function submitSchoolForm() {
+    const form = document.getElementById('addSchoolForm');
+    if (!form) return;
+    
+    const submitButton = form.querySelector('button[type="submit"]');
+    const modal = bootstrap.Modal.getInstance(document.getElementById('addSchoolModal'));
+
+    // Show loading state
+    const originalText = submitButton.innerHTML;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Menyimpan...';
+    submitButton.disabled = true;
+
+    // Collect form data
+    const formData = new FormData(form);
+    const schoolData = Object.fromEntries(formData);
+
+    // Simulate API call
+    setTimeout(() => {
+        // Success simulation
+        console.log('School data to be saved:', schoolData);
+
+        // Show success message
+        showToast('Sekolah berhasil ditambahkan!', 'success');
+
+        // Reset form and close modal
+        form.reset();
+        clearSchoolValidation();
+        modal.hide();
+
+        // Reset button
+        submitButton.innerHTML = originalText;
+        submitButton.disabled = false;
+
+        // Optionally reload the table or add new row
+        // reloadSchoolsTable();
+
+    }, 1500); // Simulate network delay
+}

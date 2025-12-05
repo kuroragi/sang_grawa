@@ -31,4 +31,14 @@ class Driver extends Model
     {
         return $this->belongsTo(Angkot::class, 'id_angkot');
     }
+
+    /**
+     * Get the user that owns the Driver
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }
