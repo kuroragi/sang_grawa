@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pt_angkots', function (Blueprint $table) {
+        Schema::create('routes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('owner')->nullable();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('fax')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->string('logo_path')->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('is_active')->nullable()->default(true);
+            $table->text('coordinates')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->blameable();
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pt_angkots');
+        Schema::dropIfExists('routes');
     }
 };

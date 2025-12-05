@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('id_pt_angkot');
+            $table->unsignedBigInteger('id_route');
             $table->string('police_number')->unique();
             $table->string('brand')->nullable();
             $table->string('type')->nullable();
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->enum('condition', ['baik', 'rusak'])->nullable()->default('baik');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
+            $table->blameable();
         });
     }
 

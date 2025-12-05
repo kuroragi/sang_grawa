@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Kuroragi\GeneralHelper\Traits\Blameable;
 
 class PtAngkot extends Model
 {
+    use SoftDeletes, Blameable;
     protected $fillable = [
         'name',
         'owner',
