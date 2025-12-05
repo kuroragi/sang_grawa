@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kuroragi\GeneralHelper\Traits\Blameable;
 
@@ -27,4 +28,14 @@ class School extends Model
         'is_active',
         'logo_path',
     ];
+
+    /**
+     * Get all of the student for the School
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function student(): HasMany
+    {
+        return $this->hasMany(Student::class, 'id_school');
+    }
 }
