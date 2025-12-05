@@ -34,7 +34,7 @@ class School extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function student(): HasMany
+    public function students(): HasMany
     {
         return $this->hasMany(Student::class, 'id_school');
     }
