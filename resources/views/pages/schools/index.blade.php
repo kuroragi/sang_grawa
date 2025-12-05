@@ -518,11 +518,297 @@
 
     </div>
     </div>
+
+    <!-- Modal Tambah Sekolah -->
+    <div class="modal fade" id="addSchoolModal" tabindex="-1" aria-labelledby="addSchoolModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content"
+                style="border-radius: 20px; border: none; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);">
+
+                <!-- Modal Header -->
+                <div class="modal-header"
+                    style="background: linear-gradient(135deg, var(--primary-red, #e74c3c), #c0392b); border-radius: 20px 20px 0 0; border: none; padding: 25px 30px;">
+                    <div class="d-flex align-items-center">
+                        <div
+                            style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                            <i class="fas fa-school" style="font-size: 20px; color: white;"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title" id="addSchoolModalLabel"
+                                style="color: white; margin: 0; font-weight: 700;">Tambah Sekolah Baru</h5>
+                            <small style="color: rgba(255,255,255,0.8);">Tambahkan data sekolah ke sistem SANG
+                                GRAWA</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+                        style="opacity: 0.8;"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body" style="padding: 30px;">
+                    <form id="addSchoolForm">
+                        @csrf
+                        <div class="row g-4">
+                            <!-- Informasi Dasar -->
+                            <div class="col-12">
+                                <div class="form-section">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-info-circle me-2"
+                                            style="color: var(--primary-red, #e74c3c);"></i>
+                                        Informasi Dasar
+                                    </h6>
+                                    <hr style="border-color: var(--primary-red, #e74c3c); opacity: 0.3;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label for="school_name" class="form-label">
+                                    <i class="fas fa-school me-1"></i>Nama Sekolah <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="school_name" name="school_name"
+                                    placeholder="Contoh: SMAN 1 Bukittinggi" required
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="npsn" class="form-label">
+                                    <i class="fas fa-barcode me-1"></i>NPSN <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="npsn" name="npsn"
+                                    placeholder="10307579" required maxlength="8"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="school_type" class="form-label">
+                                    <i class="fas fa-layer-group me-1"></i>Jenjang Pendidikan <span
+                                        class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" id="school_type" name="school_type" required
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                                    <option value="">Pilih Jenjang</option>
+                                    <option value="sd">SD (Sekolah Dasar)</option>
+                                    <option value="smp">SMP (Sekolah Menengah Pertama)</option>
+                                    <option value="sma">SMA (Sekolah Menengah Atas)</option>
+                                    <option value="smk">SMK (Sekolah Menengah Kejuruan)</option>
+                                    <option value="ma">MA (Madrasah Aliyah)</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="established_year" class="form-label">
+                                    <i class="fas fa-calendar-alt me-1"></i>Tahun Berdiri
+                                </label>
+                                <input type="number" class="form-control" id="established_year" name="established_year"
+                                    placeholder="1950" min="1900" max="2025"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                            </div>
+
+                            <!-- Alamat & Kontak -->
+                            <div class="col-12">
+                                <div class="form-section mt-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-map-marker-alt me-2"
+                                            style="color: var(--primary-red, #e74c3c);"></i>
+                                        Alamat & Kontak
+                                    </h6>
+                                    <hr style="border-color: var(--primary-red, #e74c3c); opacity: 0.3;">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address" class="form-label">
+                                    <i class="fas fa-home me-1"></i>Alamat Lengkap <span class="text-danger">*</span>
+                                </label>
+                                <textarea class="form-control" id="address" name="address" rows="3"
+                                    placeholder="Jl. Syech Ibrahim Musa No. 5, Bukittinggi" required
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;"></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">
+                                    <i class="fas fa-phone me-1"></i>Nomor Telepon
+                                </label>
+                                <input type="tel" class="form-control" id="phone" name="phone"
+                                    placeholder="0752-123456"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope me-1"></i>Email
+                                </label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="sman1@bukittinggi.sch.id"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                            </div>
+
+                            <!-- Kepala Sekolah & Jumlah Siswa -->
+                            <div class="col-12">
+                                <div class="form-section mt-4">
+                                    <h6 class="section-title">
+                                        <i class="fas fa-users me-2" style="color: var(--primary-red, #e74c3c);"></i>
+                                        Informasi Tambahan
+                                    </h6>
+                                    <hr style="border-color: var(--primary-red, #e74c3c); opacity: 0.3;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label for="principal_name" class="form-label">
+                                    <i class="fas fa-user-tie me-1"></i>Nama Kepala Sekolah
+                                </label>
+                                <input type="text" class="form-control" id="principal_name" name="principal_name"
+                                    placeholder="Dr. Ahmad Syafii, M.Pd"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="student_count" class="form-label">
+                                    <i class="fas fa-users me-1"></i>Jumlah Siswa
+                                </label>
+                                <input type="number" class="form-control" id="student_count" name="student_count"
+                                    placeholder="487" min="0"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="status" class="form-label">
+                                    <i class="fas fa-toggle-on me-1"></i>Status Sekolah
+                                </label>
+                                <select class="form-select" id="status" name="status"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                                    <option value="active" selected>Aktif</option>
+                                    <option value="inactive">Non-Aktif</option>
+                                    <option value="maintenance">Maintenance</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="accreditation" class="form-label">
+                                    <i class="fas fa-award me-1"></i>Akreditasi
+                                </label>
+                                <select class="form-select" id="accreditation" name="accreditation"
+                                    style="border-radius: 12px; border: 2px solid #e9ecef; padding: 12px 16px;">
+                                    <option value="">Pilih Akreditasi</option>
+                                    <option value="A">A (Sangat Baik)</option>
+                                    <option value="B">B (Baik)</option>
+                                    <option value="C">C (Cukup)</option>
+                                    <option value="TT">Tidak Terakreditasi</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer"
+                    style="padding: 20px 30px 30px; border: none; background: #f8f9fa; border-radius: 0 0 20px 20px;">
+                    <div class="w-100 d-flex gap-3">
+                        <button type="button" class="btn btn-outline-secondary flex-fill" data-bs-dismiss="modal"
+                            style="border-radius: 12px; padding: 12px; font-weight: 600;">
+                            <i class="fas fa-times me-1"></i>Batal
+                        </button>
+                        <button type="submit" form="addSchoolForm" class="btn btn-add flex-fill"
+                            style="border-radius: 12px; padding: 12px; font-weight: 600;">
+                            <i class="fas fa-save me-1"></i>Simpan Sekolah
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('styles')
     <!-- AOS Animation Library CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Additional Modal Styling -->
+    <style>
+        /* Enhanced Modal Styling */
+        .modal-content {
+            overflow: hidden;
+        }
+
+        .form-section .section-title {
+            color: var(--text-primary, #2c3e50);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .form-label {
+            color: var(--text-primary, #495057);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .form-label i {
+            color: var(--primary-red, #e74c3c);
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary-red, #e74c3c) !important;
+            box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25) !important;
+        }
+
+        .form-control.is-valid {
+            border-color: #27ae60 !important;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        .invalid-feedback {
+            display: block;
+            font-size: 0.875rem;
+            color: #dc3545;
+            margin-top: 5px;
+        }
+
+        .modal-header {
+            position: relative;
+        }
+
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-add:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .modal-lg {
+                max-width: 90%;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-footer {
+                padding: 15px 20px 20px;
+            }
+        }
+    </style>
 @endpush
 
 @push('scripts')
@@ -536,6 +822,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Schools page loaded with universal components');
+
+            // Initialize Add School Modal functionality
+            initializeAddSchoolModal();
 
             // Page-specific functionality can be added here
             // All universal features (search, filters, counters, etc.) are automatically loaded
@@ -556,5 +845,206 @@
             //     }
             // };
         });
+
+        // Initialize Add School Modal functionality
+        function initializeAddSchoolModal() {
+            const form = document.getElementById('addSchoolForm');
+            const modal = document.getElementById('addSchoolModal');
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            // Form validation styling
+            const inputs = form.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.borderColor = 'var(--primary-red, #e74c3c)';
+                    this.style.boxShadow = '0 0 0 0.2rem rgba(231, 76, 60, 0.25)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.style.borderColor = '#e9ecef';
+                    this.style.boxShadow = 'none';
+
+                    // Validate individual field
+                    validateField(this);
+                });
+
+                input.addEventListener('input', function() {
+                    // Remove invalid styling on input
+                    this.classList.remove('is-invalid');
+                    const feedback = this.parentNode.querySelector('.invalid-feedback');
+                    if (feedback) {
+                        feedback.remove();
+                    }
+                });
+            });
+
+            // NPSN formatting (only numbers, max 8 digits)
+            const npsnInput = document.getElementById('npsn');
+            npsnInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 8);
+            });
+
+            // Phone number formatting
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function() {
+                // Allow numbers, hyphens, spaces, and parentheses
+                this.value = this.value.replace(/[^0-9\-\s\(\)]/g, '');
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (validateForm()) {
+                    submitForm();
+                }
+            });
+
+            // Reset form when modal is closed
+            modal.addEventListener('hidden.bs.modal', function() {
+                form.reset();
+                clearValidation();
+            });
+        }
+
+        // Validate individual field
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            let message = '';
+
+            // Clear previous validation
+            field.classList.remove('is-invalid', 'is-valid');
+            const existingFeedback = field.parentNode.querySelector('.invalid-feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            // Required field validation
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                message = 'Field ini wajib diisi';
+            }
+
+            // Specific validations
+            switch (field.id) {
+                case 'school_name':
+                    if (value && value.length < 3) {
+                        isValid = false;
+                        message = 'Nama sekolah minimal 3 karakter';
+                    }
+                    break;
+
+                case 'npsn':
+                    if (value && (value.length !== 8 || !/^\d{8}$/.test(value))) {
+                        isValid = false;
+                        message = 'NPSN harus 8 digit angka';
+                    }
+                    break;
+
+                case 'email':
+                    if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                        isValid = false;
+                        message = 'Format email tidak valid';
+                    }
+                    break;
+
+                case 'established_year':
+                    const currentYear = new Date().getFullYear();
+                    if (value && (value < 1900 || value > currentYear)) {
+                        isValid = false;
+                        message = `Tahun harus antara 1900 dan ${currentYear}`;
+                    }
+                    break;
+
+                case 'student_count':
+                    if (value && (value < 0 || value > 10000)) {
+                        isValid = false;
+                        message = 'Jumlah siswa tidak valid';
+                    }
+                    break;
+            }
+
+            // Apply validation styling
+            if (!isValid) {
+                field.classList.add('is-invalid');
+                const feedback = document.createElement('div');
+                feedback.className = 'invalid-feedback';
+                feedback.textContent = message;
+                field.parentNode.appendChild(feedback);
+            } else if (value) {
+                field.classList.add('is-valid');
+            }
+
+            return isValid;
+        }
+
+        // Validate entire form
+        function validateForm() {
+            const form = document.getElementById('addSchoolForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        // Clear all validation
+        function clearValidation() {
+            const form = document.getElementById('addSchoolForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+
+            inputs.forEach(input => {
+                input.classList.remove('is-invalid', 'is-valid');
+                input.style.borderColor = '#e9ecef';
+                input.style.boxShadow = 'none';
+            });
+
+            const feedbacks = form.querySelectorAll('.invalid-feedback');
+            feedbacks.forEach(feedback => feedback.remove());
+        }
+
+        // Submit form (placeholder - would normally send to server)
+        function submitForm() {
+            const form = document.getElementById('addSchoolForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addSchoolModal'));
+
+            // Show loading state
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Menyimpan...';
+            submitButton.disabled = true;
+
+            // Collect form data
+            const formData = new FormData(form);
+            const schoolData = Object.fromEntries(formData);
+
+            // Simulate API call
+            setTimeout(() => {
+                // Success simulation
+                console.log('School data to be saved:', schoolData);
+
+                // Show success message
+                showToast('Sekolah berhasil ditambahkan!', 'success');
+
+                // Reset form and close modal
+                form.reset();
+                clearValidation();
+                modal.hide();
+
+                // Reset button
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+
+                // Optionally reload the table or add new row
+                // reloadSchoolsTable();
+
+            }, 1500); // Simulate network delay
+        }
     </script>
 @endpush
