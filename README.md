@@ -99,7 +99,24 @@ Kami menyambut kontribusi dari komunitas! Silakan buat issue atau pull request u
 
 ## Lisensi
 
-Aplikasi ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
+⚠️ **PERHATIAN: LISENSI TERBATAS** ⚠️
+
+Aplikasi ini dilisensikan di bawah **Sang Grawa Restricted License**. 
+
+### Ringkasan Lisensi:
+- ✅ **Diperbolehkan**: Melihat, mempelajari, dan mendiskusikan kode untuk tujuan edukasi
+- ❌ **TIDAK Diperbolehkan**: Menggunakan, menyalin, memodifikasi, atau mendistribusikan tanpa izin tertulis
+- 📝 **Penggunaan Komersial**: Memerlukan izin eksplisit dari pengembang
+
+### Cara Meminta Izin:
+Jika Anda tertarik menggunakan atau mengadaptasi aplikasi ini:
+1. Hubungi kami melalui email: uum1612@gmail.com
+2. Jelaskan tujuan dan ruang lingkup penggunaan
+3. Tunggu persetujuan tertulis sebelum melanjutkan
+
+**Lisensi lengkap**: [LICENSE](LICENSE)
+
+*Kami sengaja membuat repository ini public agar komunitas dapat belajar dan meminta izin untuk duplikasi yang sah.*
 
 ## Tim Pengembang
 
